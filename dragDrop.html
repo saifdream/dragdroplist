@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="demo">
+    <head>
+        <meta charset="utf-8" />
+        <title>Drag &amp; Drop Lists</title>
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="bootstrap/css/bootstrap-responsive.min.css">
+        <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/dragDrop.css" />
+    </head>
+    <body data-ng-controller="TypesDemoController">
+        <section>
+
+          <div class="contaner">
+            <div class="form-horizontal">
+              <div class="typesDemo row">
+                <br>
+                <div class="col-md-6 col-md-offset-3 boundary" style="padding-bottom: 10px">
+
+                  <!--Form Header-->
+                  <div id="header" class="page-header" style="text-align: center">
+			        <h4 style="font-family: 'Times New Roman'; color: #0285db">
+                        <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Modify User Role
+                    </h4>
+			      </div>
+
+                  <!--Current Role-->
+                  <div class="col-md-6 line">
+
+                    <!--Current User-->
+                    <div class="panel panel-info">
+
+			           <div class="panel-heading">
+				          <h5 class="panel-title"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Current Users</h5>
+			           </div>
+			           <div class="panel-body">
+
+                          <ul data-dnd-list="currentUser" data-dnd-allowed-types="['RemovedUsers', 'CurrentUser']">
+                             <li data-ng-repeat="person in currentUser"
+                                 data-dnd-draggable="person"
+                                 data-dnd-type="person.type"
+                                 data-dnd-disable-if="person.type == 'unknown'"
+                                 data-dnd-moved="currentUser.splice($index, 1)"
+                                 data-dnd-effect-allowed="move"
+                                 class="background-{{person.type}}"
+                              >
+                              {{person.name}}
+                              <button class="btn btn-link btn-sm" data-ng-click="removeCurrentlist($index, person)">
+                                  <span class="glyphicon glyphicon-remove"></span>
+                              </button>
+                              </li>
+                          </ul>
+
+                       </div>
+
+                    </div>
+
+                    <!--Romoved User Role-->
+                    <div class="panel panel-info">
+
+			           <div class="panel-heading">
+				          <h5 class="panel-title"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Removed Users</h5>
+			           </div>
+			           <div class="panel-body">
+
+                          <ul data-dnd-list="removedUser" data-dnd-allowed-types="['RemovedUser', 'CurrentUser']">
+                             <li data-ng-repeat="person in removedUser"
+                                 data-dnd-draggable="person"
+                                 data-dnd-type="person.type"
+                                 data-dnd-disable-if="person.type == 'unknown'"
+                                 data-dnd-moved="removedUser.splice($index, 1)"
+                                 data-dnd-effect-allowed="move"
+                                 class="background-{{person.type}}"
+                              >
+                              {{person.name}}
+                              <button class="btn btn-link btn-sm" data-ng-click="removeRemovedlist($index, person)">
+                                 <span class="glyphicon glyphicon-plus"></span>
+                              </button>
+                              </li>
+                          </ul>
+
+                       </div>
+
+                    </div>
+
+                    <!--Added User Role-->
+                    <div class="panel panel-info">
+
+			           <div class="panel-heading">
+				          <h5 class="panel-title"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Added User</h5>
+			           </div>
+			           <div class="panel-body">
+
+                          <ul data-dnd-list="addedUser" data-dnd-allowed-types="['availableuser','AddedUser']">
+                             <li data-ng-repeat="person in addedUser"
+                                 data-dnd-draggable="person"
+                                 data-dnd-type="person.type"
+                                 data-dnd-disable-if="person.type == 'unknown'"
+                                 data-dnd-moved="addedUser.splice($index, 1)"
+                                 data-dnd-effect-allowed="move"
+                                 class="background-{{person.type}}"
+                              >
+                              {{person.name}}
+                              <button class="btn btn-link btn-sm" data-ng-click="removeAddedUser($index, person)">
+                                 <span class="glyphicon glyphicon-remove"></span>
+                              </button>
+                              </li>
+                          </ul>
+                       </div>
+                       
+                    </div>
+
+                  </div>
+
+                  <!--List for Adding Role-->
+                  <div class="col-md-6">
+
+                    <div class="panel panel-info">
+
+			           <div class="panel-heading">
+				          <h5 class="panel-title"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;List Of Available Users</h5>
+			           </div>
+			           <div class="panel-body">
+
+                          <ul data-dnd-list="availablelist" data-dnd-allowed-types="['AddedUser', 'availableuser']">
+                             <li data-ng-repeat="person in availablelist"
+                                 data-dnd-draggable="person"
+                                 data-dnd-type="person.type"
+                                 data-dnd-disable-if="person.type == 'unknown'"
+                                 data-dnd-moved="availablelist.splice($index, 1)"
+                                 data-dnd-effect-allowed="move"
+                                 class="background-{{person.type}}"
+                              >
+                              {{person.name}}
+                              <button class="btn btn-link btn-sm" data-ng-click="removeAvailablelist($index, person)">
+                                  <span class="glyphicon glyphicon-plus"></span>
+                              </button>
+                              </li>
+                          </ul>
+
+                       </div>
+
+                    </div>
+                  </div>
+                  
+                  <!--Save User Role-->
+                  <div class="col-md-6 col-md-offset-3" style="padding-bottom: 20px">
+                      <button class="btn btn-info btn-sm btn-block" data-ng-click="save()">
+                          <span class="glyphicon glyphicon-save"></span> &nbsp;&nbsp; Save
+                      </button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+        <script src="AngularJS/angular.min.js"></script>
+        <script src="AngularJS/angular-drag-and-drop-lists.min.js"></script>
+        <script src="js/dragDrop.js"></script>
+    </body>
+</html>

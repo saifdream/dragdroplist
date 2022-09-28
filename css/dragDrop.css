@@ -1,0 +1,84 @@
+.boundary {
+	border-style: solid;
+	border-color: #c2d7ff;
+    border-width: 1px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+    box-shadow: 0 1px 2px rgba(0,0,0,.05);
+}
+
+.line {
+	padding-right: 20px;
+	margin-top: 0px;
+    margin-bottom: 20px;
+    border-width: 1px;
+    border-right-style: solid;
+    border-color: #c2d7ff;
+}
+
+/**
+ * For the correct positioning of the placeholder element, the dnd-list and
+ * it's children must have position: relative
+ */
+.typesDemo ul[data-dnd-list],
+.typesDemo ul[data-dnd-list] > li {
+	position: relative;
+    text-align: center;
+}
+
+/**
+ * The dnd-list should always have a min-height,
+ * otherwise you can't drop to it once it's empty
+ */
+.typesDemo ul[data-dnd-list] {
+    min-height: 5px;
+    padding-left: 0px;
+}
+
+/**
+ * The dndDraggingSource class will be applied to
+ * the source element of a drag operation. It makes
+ * sense to hide it to give the user the feeling
+ * that he's actually moving it.
+ */
+.typesDemo ul[data-dnd-list] .dndDraggingSource {
+    display: none;
+}
+
+/**
+ * An element with .dndPlaceholder class will be
+ * added to the dnd-list while the user is dragging
+ * over it.
+ */
+.typesDemo ul[data-dnd-list] .dndPlaceholder {
+    display: block;
+    background-color: #ddd;
+    min-height: 22px;
+}
+
+/**
+ * The dnd-lists's child elements currently MUST have
+ * position: relative. Otherwise we can not determine
+ * whether the mouse pointer is in the upper or lower
+ * half of the element we are dragging over. In other
+ * browsers we can use event.offsetY for this.
+ */
+.typesDemo ul[data-dnd-list] li {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    display: block;
+    margin-bottom: -1px;
+    
+    /* Disable text selection if item is not draggable */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
